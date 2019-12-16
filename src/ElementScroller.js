@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { ScrollManager, withManager } from './ScrollManager';
+import React from "react";
+import PropTypes from "prop-types";
+import { ScrollManager, withManager } from "./ScrollManager";
 
 class ManagedElementScroller extends React.Component {
   constructor(props) {
@@ -25,9 +25,11 @@ class ManagedElementScroller extends React.Component {
     const { manager, scrollKey } = this.props;
     const node = this._ref.current;
     if (!manager) {
-      console.warn('ElementScroller only works when nested within a ScrollManager'); // eslint-disable-line no-console
+      console.warn(
+        "ElementScroller only works when nested within a ScrollManager"
+      ); // eslint-disable-line no-console
     } else if (scrollKey && node) {
-      manager._registerElement(scrollKey, node);
+      setTimeout(() => manager._registerElement(scrollKey, node), 1);
     }
   }
 
@@ -39,7 +41,9 @@ class ManagedElementScroller extends React.Component {
   }
 
   render() {
-    return React.cloneElement(React.Children.only(this.props.children), { ref: this._ref });
+    return React.cloneElement(React.Children.only(this.props.children), {
+      ref: this._ref
+    });
   }
 }
 
